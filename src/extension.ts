@@ -85,4 +85,15 @@ export function activate(context: vscode.ExtensionContext) {
 			return result;
 		}
 	});
+
+	vscode.languages.registerHoverProvider('markdown', new class implements vscode.HoverProvider {
+		async provideHover(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) {
+			const wait = Math.round(Math.random() * 654);
+			await new Promise(resolve => setTimeout(resolve, wait));
+			return new vscode.Hover(
+				new vscode.MarkdownString(`This is the fake language hover for markdown (artifically delayed by \`${wait}\`ms)`)
+			);
+		}
+
+	});
 }
