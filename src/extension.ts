@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 					break; // not found
 				}
 
-				if (fooIdx < 0 || barIdx < fooIdx) {
+				if (fooIdx < 0 || (barIdx >= 0 && barIdx < fooIdx)) {
 					// before BAR
 					const before = document.positionAt(barIdx);
 					const part = new vscode.InlayHintLabelPart('foo');
@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
 					continue;
 				}
 
-				if (barIdx < 0 || fooIdx < barIdx) {
+				if (barIdx < 0 || (fooIdx >= 0 && fooIdx < barIdx)) {
 					// after FOO
 					const after = document.positionAt(fooIdx + 3 /* 'foo'.length */);
 					const part = new vscode.InlayHintLabelPart('bar');
