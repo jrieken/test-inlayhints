@@ -36,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 					const hint = new vscode.InlayHint([part], before);
 					result.push(hint);
-					pos = barIdx + 4;
+					pos = barIdx + 3;
 					continue;
 				}
 
@@ -46,7 +46,7 @@ export function activate(context: vscode.ExtensionContext) {
 					const part = new vscode.InlayHintLabelPart('bar');
 					const hint = new vscode.InlayHint([part], after);
 					result.push(hint);
-					pos = fooIdx + 4;
+					pos = fooIdx + 3;
 					continue;
 				}
 			}
