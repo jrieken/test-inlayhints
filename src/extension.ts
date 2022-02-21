@@ -34,7 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
 						part.location = new vscode.Location(document.uri, document.positionAt(firstFooIdx));
 					}
 
-					const hint = new vscode.InlayHint([part], before);
+					const hint = new vscode.InlayHint(before, [part]);
+					hint.command = { command: 'hello.inlayHint', title: 'dbl click', arguments: ['BAR'] };
 					result.push(hint);
 					pos = barIdx + 3;
 					continue;
@@ -44,7 +45,8 @@ export function activate(context: vscode.ExtensionContext) {
 					// after FOO
 					const after = document.positionAt(fooIdx + 3 /* 'foo'.length */);
 					const part = new vscode.InlayHintLabelPart('bar');
-					const hint = new vscode.InlayHint([part], after);
+					const hint = new vscode.InlayHint(after, [part]);
+					hint.command = { command: 'hello.inlayHint', title: 'dbl click', arguments: ['FOO'] };
 					result.push(hint);
 					pos = fooIdx + 3;
 					continue;
@@ -94,6 +96,9 @@ export function activate(context: vscode.ExtensionContext) {
 				new vscode.MarkdownString(`This is the fake language hover for markdown (artifically delayed by \`${wait}\`ms)`)
 			);
 		}
+	});
 
+	vscode.commands.registerCommand('hello.inlayHint', (what: any) => {
+		vscode.window.showInformationMessage('You clicked: ' + String(what));
 	});
 }
