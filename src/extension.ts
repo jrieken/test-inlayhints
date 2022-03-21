@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
 					}
 
 					const hint = new vscode.InlayHint(before, [part]);
-					hint.command = { command: 'hello.inlayHint', title: 'dbl click', arguments: ['BAR'] };
+					hint.textEdits = [vscode.TextEdit.insert(new vscode.Position(0, 0), 'FOO')]
 					result.push(hint);
 					pos = barIdx + 3;
 					continue;
@@ -46,7 +46,7 @@ export function activate(context: vscode.ExtensionContext) {
 					const after = document.positionAt(fooIdx + 3 /* 'foo'.length */);
 					const part = new vscode.InlayHintLabelPart('bar');
 					const hint = new vscode.InlayHint(after, [part]);
-					hint.command = { command: 'hello.inlayHint', title: 'dbl click', arguments: ['FOO'] };
+					hint.textEdits = [vscode.TextEdit.insert(new vscode.Position(0, 0), 'BAR')]
 					result.push(hint);
 					pos = fooIdx + 3;
 					continue;
